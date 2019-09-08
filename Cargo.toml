@@ -3,5 +3,12 @@ name = "roman_numerals_converter"
 version = "0.1.0"
 authors = ["Dawid Spiechowicz <spiechu@gmail.com>"]
 edition = "2018"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/spiechu/roman_numerals_converter"
+description = """
+Convert Arabic numerals to Roman numerals and vice versa.
+"""
+keywords = ["roman", "arabic", "numerals", "convert"]
 
 [dependencies]
