@@ -1,0 +1,18 @@
+language: rust
+sudo: false
+
+matrix:
+  include:
+    - rust: stable
+      name: "Linux, stable"
+
+    - rust: beta
+      name: "Linux, beta"
+
+script:
+  - cargo build --verbose --all
+  - cargo test --verbose --all
+
+notifications:
+  email:
+    on_success: never
