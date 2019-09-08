@@ -9,6 +9,10 @@ matrix:
     - rust: beta
       name: "Linux, beta"
 
+    - rust: stable
+      name: "Windows, stable"
+      os: windows
+
 script:
   - cargo build --verbose --all
   - cargo test --verbose --all
