@@ -20,6 +20,6 @@ mod tests {
     fn test_conversion_to_arabic_1939() {
         let converted = arabic_convert("MCMXXXIX".to_string());
 
-        assert_eq!(converted, 1939);
+        assert_eq!(converted, Ok(1939));
     }
 }

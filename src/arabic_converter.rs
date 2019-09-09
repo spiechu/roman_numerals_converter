@@ -1,7 +1,7 @@
 use super::dictionary::CONVERTIBLE;
 use std::ops::Add;
 
-pub fn convert(number_to_convert: String) -> u32 {
+pub fn convert(number_to_convert: String) -> Result<u32, String> {
     let mut arabic_result = 0;
 
     let normalized_array = get_normalized_array(number_to_convert);
@@ -12,9 +12,6 @@ pub fn convert(number_to_convert: String) -> u32 {
     while curr_idx <= max_idx {
         if curr_idx + 1 <= max_idx {
             let key_candidate = normalized_array.get(curr_idx).unwrap().to_owned().add(normalized_array.get(curr_idx + 1).unwrap());
-
-            println!("{}", key_candidate);
-
             let symbol = get_symbol(key_candidate);
 
             if symbol.is_some() {
@@ -35,10 +32,10 @@ pub fn convert(number_to_convert: String) -> u32 {
             continue;
         }
 
-        panic!("not foound");
+        return Err(format!("Symbol '{}' not found", key_candidate.to_string()));
     }
 
-    arabic_result
+    Ok(arabic_result)
 }
 
 fn get_normalized_array(number_to_convert: String) -> Vec<String>
@@ -125,6 +122,15 @@ mod tests {
 
         let result = convert(numeral);
 
-        assert_eq!(result, 10);
+        assert_eq!(result, Ok(10));
+    }
+
+    #[test]
+    fn test_invalid_symbol_will_return_error() {
+        let numeral = "U".to_string();
+
+        let result = convert(numeral);
+
+        assert_eq!(result, Err("Symbol 'U' not found".to_string()));
     }
 }
