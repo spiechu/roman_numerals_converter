@@ -2,7 +2,7 @@ use super::dictionary::CONVERTIBLE;
 
 pub fn convert(number_to_convert: u32) -> Result<String, String> {
     if number_to_convert > 3999 {
-        return Err("Invalid conversion above maximum limit of 3999".to_string());
+        return Err(format!("Invalid conversion of '{}' above maximum limit of 3999", number_to_convert));
     }
 
     let mut roman_number = String::new();
@@ -50,6 +50,6 @@ mod tests {
 
     #[test]
     fn test_should_fail_over_3999() {
-        assert_eq!(convert(4000), Err("Invalid conversion above maximum limit of 3999".to_string()));
+        assert_eq!(convert(4000), Err("Invalid conversion of '4000' above maximum limit of 3999".to_string()));
     }
 }

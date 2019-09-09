@@ -18,8 +18,10 @@ mod tests {
 
     #[test]
     fn test_conversion_to_arabic_1939() {
-        let converted = arabic_convert("MCMXXXIX".to_string());
+        let converted = arabic_convert("MCMXXXIX");
 
+        assert_eq!(converted.is_err(), false);
+        assert_eq!(converted.is_ok(), true);
         assert_eq!(converted, Ok(1939));
     }
 }
