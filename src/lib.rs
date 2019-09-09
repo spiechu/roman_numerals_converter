@@ -11,7 +11,9 @@ mod tests {
     fn test_conversion_to_roman_1939() {
         let converted = roman_convert(1939);
 
-        assert_eq!(converted, "MCMXXXIX");
+        assert_eq!(converted.is_err(), false);
+        assert_eq!(converted.is_ok(), true);
+        assert_eq!(converted, Ok("MCMXXXIX".to_string()));
     }
 
     #[test]

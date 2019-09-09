@@ -1,6 +1,10 @@
 use super::dictionary::CONVERTIBLE;
 
-pub fn convert(number_to_convert: u32) -> String {
+pub fn convert(number_to_convert: u32) -> Result<String, String> {
+    if number_to_convert > 3999 {
+        return Err("Invalid conversion above maximum limit of 3999".to_string());
+    }
+
     let mut roman_number = String::new();
     let mut to_convert = number_to_convert;
 
@@ -17,7 +21,7 @@ pub fn convert(number_to_convert: u32) -> String {
         }
     }
 
-    roman_number
+    Ok(roman_number)
 }
 
 #[cfg(test)]
@@ -26,21 +30,26 @@ mod tests {
 
     #[test]
     fn test_can_convert_zeros() {
-        assert_eq!(convert(0), "");
+        assert_eq!(convert(0), Ok("".to_string()));
     }
 
     #[test]
     fn test_can_convert_one() {
-        assert_eq!(convert(1), "I");
-    }
-
-    #[test]
-    fn test_can_convert_ww2_start_date() {
-        assert_eq!(convert(1939), "MCMXXXIX");
+        assert_eq!(convert(1), Ok("I".to_string()));
     }
 
     #[test]
     fn test_can_convert_2019() {
-        assert_eq!(convert(2019), "MMXIX");
+        assert_eq!(convert(2019), Ok("MMXIX".to_string()));
+    }
+
+    #[test]
+    fn test_can_convert_3999() {
+        assert_eq!(convert(3999), Ok("MMMCMXCIX".to_string()));
+    }
+
+    #[test]
+    fn test_should_fail_over_3999() {
+        assert_eq!(convert(4000), Err("Invalid conversion above maximum limit of 3999".to_string()));
     }
 }
